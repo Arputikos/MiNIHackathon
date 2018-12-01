@@ -36,7 +36,7 @@ public class Turret : MonoBehaviour {
 
 		for (int i = 0; i < enemiesColliders.Length; i++)
 		{
-			if (enemiesColliders[i].tag == "Enemy")
+			if (enemiesColliders[i].tag == "Enemy" && !enemiesColliders[i].gameObject.GetComponent<EnemyScript>().dead)
 			{
 				target = enemiesColliders[i];
 				break;

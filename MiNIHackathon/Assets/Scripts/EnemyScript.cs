@@ -15,8 +15,8 @@ public class EnemyScript : MonoBehaviour {
     public GameObject popup;
     NavMeshAgent agent;
 
-    bool dead = false;
-    float timeDead = 5;
+    public bool dead = false;
+    float timeDead = 3;
 
     Vector3 destination;
 
@@ -52,15 +52,20 @@ public class EnemyScript : MonoBehaviour {
 
     public void takeDamage(float damage)
     {
-        health -= damage;
+        GetComponent<Animator>().SetBool("Death", true);
+        dead = true;
 
+        return;
+
+        health -= damage;
+        /*
         image.fillAmount = health / maxHealth;
 
         Vector3 newPosition = transform.position + new Vector3(0, 1f, 0);
         var damagePopup = Instantiate(popup, newPosition, Quaternion.identity,
             transform);
         damagePopup.GetComponent<popupScript>().Init((-damage).ToString(),Color.red);
-
+        */
 
         if (health <= 0)
         {
