@@ -16,13 +16,13 @@ public class EnemyScript : MonoBehaviour {
 	float t;
 
 	void Start () {
-		
+		t = Random.Range(1.0f, 5.0f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		transform.Rotate(Vector3.up * Time.deltaTime, Space.World);
+		transform.Rotate(Vector3.up, t * 20 * Time.deltaTime);
 
 	}
 
