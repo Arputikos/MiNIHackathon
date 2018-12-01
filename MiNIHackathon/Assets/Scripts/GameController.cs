@@ -2,29 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
+using HoloToolkit.Unity.SpatialMapping;
 
 public class GameController : MonoBehaviour {
     public GameObject Cursor;
+    public GameObject treePrefab;//where game center is going to be located
+    public GameObject sceneCenterObject;//scene center
 
-    public Spawnable spawnObjectPrefab;
-
-    private bool IsGravity = false;
-
-    // Use this for initialization
     void Start () {
         if (!Cursor)
-        {
             Debug.LogError("!Cursor");
-        }
-        if (!spawnObjectPrefab)
-        {
-            Debug.LogError("!spawnObjectPrefab");
-        }
 
-        //GravityOff();
     }
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}
@@ -33,70 +23,30 @@ public class GameController : MonoBehaviour {
     {
         Debug.Log("GameController::StartGame");
 
-        SpawnObject();
+        sceneCenterObject = Instantiate(treePrefab, new Vector3(0, 0, 2), Quaternion.identity, this.transform);
+        sceneCenterObject.GetComponent<TapToPlace>().StartPlacing();
+
     }
 
-    public void SpawnObject()
+    //when tree is placed
+    public void ScenePlaced()
     {
-        Spawn(spawnObjectPrefab, new Vector3(0, 0, 2), Quaternion.identity);
+        Destroy(sceneCenterObject.GetComponent<TapToPlace>());
     }
 
-    public void Spawn(
-    Spawnable spawnObjectPrefab,
-    Vector3 position,
-    Quaternion rotation)
+    public void StartLevel()
     {
-        Debug.Log("Spawner::Spawn");
-        var spawnedObject = Instantiate(spawnObjectPrefab, position, rotation, null);
 
-        SpawnInit(spawnedObject);
     }
 
-    private void SpawnInit(Spawnable spawnedObject)
+    public void EndGame()//and restart
     {
-        spawnedObject.Init(Cursor);
-        var rigidbody = spawnedObject.GetComponent<Rigidbody>();
-        if (rigidbody)
-        {
-            rigidbody.isKinematic = !IsGravity;
-        }
+
     }
 
-    public void ToggleGravity()
-    {
-        if (IsGravity)
-        {
-            GravityOff();
-        }
-        else
-        {
-            GravityOn();
-        }
-    }
-
-    public void GravityOn()
-    {
-        IsGravity = true;
-
-        Debug.Log("Spawner::GravityOn");
-
-        var foundObjects = FindObjectsOfType<Rigidbody>();
-        foreach(var foundObject in foundObjects)
-        {
-            foundObject.isKinematic = false;
-        }
-    }
-
-    public void GravityOff()
-    {
-        IsGravity = false;
-
-        Debug.Log("Spawner::GravityOff");
-
-        var foundObjects = FindObjectsOfType<Rigidbody>();
-        foreach (var foundObject in foundObjects)
-        {
-            foundObject.isKinematic = true;
-        }
-    }
 }
+
+
+//click play to start the game
+//click on screen to place the tree on mesh based on real world
+//play

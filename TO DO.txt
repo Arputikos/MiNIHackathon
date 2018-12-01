@@ -1,5 +1,5 @@
--jakiœ gameloop czy coœ
--stawianie choinki na pocz¹tku gry
+>>>-jakiœ gameloop czy coœ
+>>>-stawianie choinki na pocz¹tku gry
 -pasek zdrowia choinki na HIDzie (i na UI)
 -przegrywanie gdy ¿ycie 0
 
@@ -11,7 +11,7 @@
 -ustawianie boxa
 -UI przyciski (wybór czynnoœci): ustawianie boxa, wie¿yczki i prezentu
 -ustawianie wie¿yczki (tylko na boxie, i tylko jedn¹)
--postawienie prezentu, wybuch po 2-3 s. i particle
+>>>-postawienie prezentu, wybuch po 2-3 s. i particle
 -*animacje wie¿yczek i pociski
 -napis ile dmg, ile hajsu dostajesz, ile tracisz przy stawianiu czegoœ/zabiciu
 
@@ -26,7 +26,8 @@
 
 POTRZEBNE ASSETY
 -cube z tekstur¹ pud³a albo prezentu
--model wie¿yczki
+-model wie¿yczki i animacje
+-model enemy i animacje
 -particle œnieg
 -particle wybuch
 -muzyka

@@ -1435,7 +1435,7 @@ GameObject:
   - component: {fileID: 1280105748}
   m_Layer: 0
   m_Name: GameScene
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1467,8 +1467,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cursor: {fileID: 307031168}
-  spawnObjectPrefab: {fileID: 114221297420831672, guid: 7010a07b15967004dbf5ea5897d53d52,
-    type: 2}
+  treePrefab: {fileID: 1242467465749534, guid: b8d52b7d56996cd48bd3f2ab4b8e8be8, type: 2}
+  sceneCenterObject: {fileID: 0}
 --- !u!114 &1280105747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1481,14 +1481,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 1280105746}
-  gameMenu: {fileID: 1613095634}
+  gameStartMenu: {fileID: 1613095634}
 --- !u!114 &1280105748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1280105744}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c62fd7a55ba7458499b69cae18f83806, type: 3}
   m_Name: 
@@ -1507,7 +1507,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1280105744}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7d6513c2cdf97f409654a2a4114d9b1, type: 3}
   m_Name: 
