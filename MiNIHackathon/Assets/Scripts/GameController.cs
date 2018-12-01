@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 using HoloToolkit.Unity.SpatialMapping;
+using UnityEngine.AI;
 
 public enum MODE
 {
@@ -46,7 +47,6 @@ public class GameController : MonoBehaviour {
     }
 	
 	void Update () {
-
         //spawning enemies every random time
         if (levelStarted && spawnTime >= timeToNextSpawn)
         {
@@ -83,8 +83,8 @@ public class GameController : MonoBehaviour {
                 break;
             case MODE.PLACE_OBSTACLE:
                 placeMode = MODE.PLACE_BOMB;
-                //GameObject obstacle = Instantiate(bombPrefab, GetSpawnPos(), Quaternion.identity, this.transform);
-                //obstacle.GetComponent<TapToPlace>().StartPlacing();
+                GameObject obstacle = Instantiate(bombPrefab, GetSpawnPos(), Quaternion.identity, this.transform);
+                obstacle.GetComponent<TapToPlace>().StartPlacing();
                 break;
             case MODE.PLACE_TURRET_01:
                 break;
@@ -118,18 +118,21 @@ public class GameController : MonoBehaviour {
 
     public void StartLevel()
     {
+        //biold navmesh
+        sceneCenterObject.GetComponent<NavMeshSurface>().BuildNavMesh();   
+
         levelStarted = true;
         spawnTime = 0;
         timeToNextSpawn = Random.Range(0f, 2.0f);
         placeMode = MODE.PLACE_BOMB;
-        //GameObject obstacle = Instantiate(bombPrefab, GetSpawnPos(), Quaternion.identity, this.transform);
-        //obstacle.GetComponent<TapToPlace>().StartPlacing();
+        GameObject obstacle = Instantiate(bombPrefab, GetSpawnPos(), Quaternion.identity, this.transform);
+        obstacle.GetComponent<TapToPlace>().StartPlacing();
     }
 
     void SpawnEnemy()
     {
         BoxCollider collider = sceneCenterObject.GetComponentInChildren<BoxCollider>();
-        float distance = collider.bounds.size.x * 0.5f;//will spawn in radius of 90% space between center of scene and border.
+        float distance = collider.bounds.size.x * 0.4f;//will spawn in radius of 90% space between center of scene and border.
         float angle = Random.Range(0, 360);
         float x = Mathf.Cos(angle * Mathf.Deg2Rad) * distance + sceneCenterObject.transform.position.x;
         float z = Mathf.Sin(angle * Mathf.Deg2Rad) * distance + sceneCenterObject.transform.position.z;
