@@ -166,7 +166,7 @@ namespace HoloToolkit.Unity.SpatialMapping
 
             ToggleSpatialMesh();
             AttachWorldAnchor();
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ScenePlaced();
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().PlacingIsDone();
         }
 
         private void AttachWorldAnchor()

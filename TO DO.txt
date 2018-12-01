@@ -1,14 +1,14 @@
 >>>-jakiœ gameloop czy coœ
 >>>-stawianie choinki na pocz¹tku gry
--pasek zdrowia choinki na HIDzie (i na UI)
+>>>-pasek zdrowia choinki na HIDzie (i na UI)
 -przegrywanie gdy ¿ycie 0
 
 -przeciwnicy i ai (navmeshe)
--spawnowanie ich
+>>>-spawnowanie ich
 -*fale przeciwników
 -animacje przeciwników
 
--ustawianie boxa
+>>>-ustawianie boxa
 -UI przyciski (wybór czynnoœci): ustawianie boxa, wie¿yczki i prezentu
 -ustawianie wie¿yczki (tylko na boxie, i tylko jedn¹)
 >>>-postawienie prezentu, wybuch po 2-3 s. i particle
@@ -26,9 +26,9 @@
 
 POTRZEBNE ASSETY
 -cube z tekstur¹ pud³a albo prezentu
--model wie¿yczki i animacje
--model enemy i animacje
--particle œnieg
+>>>-model wie¿yczki i animacje
+>>>-model enemy i animacje
+>>>-particle œnieg
 -particle wybuch
 -muzyka
 -audio wybuchu, chodzenia, spawnu, strzelania wie¿yczki, damage
