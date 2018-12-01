@@ -21,9 +21,7 @@ public class EnemyScript : MonoBehaviour {
 	void Update () {
 		
 	}
-    //Vector3 newPosition = transform.position + new Vector3(0, 1.5f, 0);
-    //var damagePopup = Instantiate(popup, newPosition, Quaternion.identity);
-    //damagePopup.transform.LookAt(Camera.current.transform);
+
 
 
     public void takeDamage(float damage)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameView : MonoBehaviour {
 
     public GameController gameController;
-    public GameMenu gameMenu;
+    public GameMenu gameStartMenu;
     
 	// Use this for initialization
 	void Start () {
@@ -13,7 +13,7 @@ public class GameView : MonoBehaviour {
         {
             Debug.LogError("!gameController");
         }
-        if (!gameMenu)
+        if (!gameStartMenu)
         {
             Debug.LogError("!gameMenu");
         }
@@ -34,11 +34,11 @@ public class GameView : MonoBehaviour {
 
     public void ShowMenu()
     {
-        gameMenu.Show();
+        gameStartMenu.Show();
     }
 
     public void HideMenu()
     {
-        gameMenu.Hide();
+        gameStartMenu.Hide();
     }
 }
