@@ -2,151 +2,101 @@
 using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
-using HoloToolkit.Unity.SpatialMapping;
-
-public enum MODE
-{
-    NONE,
-    PLACE_GAME_SCENE,//first only
-    PLACE_OBSTACLE,
-    PLACE_TURRET_01,
-    PLACE_BOMB,//gift  box
-
-    _COUNT
-}
-
 
 public class GameController : MonoBehaviour {
     public GameObject Cursor;
-    public GameObject sceneCenterPrefab;//where game center is going to be located
-    GameObject sceneCenterObject;//scene center
 
-    public GameObject enemy01Prefab,
-                        turret01Prefab,
-                          obstacle01Prefab,
-                          bombPrefab;
+    public Spawnable spawnObjectPrefab;
 
-    List<GameObject> enemies;
+    private bool IsGravity = false;
 
-    MODE placeMode;
-
-    bool levelStarted;
-
-    float timeToNextSpawn;//spawning every random time
-    float spawnTime;
-
+    // Use this for initialization
     void Start () {
         if (!Cursor)
+        {
             Debug.LogError("!Cursor");
+        }
+        if (!spawnObjectPrefab)
+        {
+            Debug.LogError("!spawnObjectPrefab");
+        }
 
-        var x = GameObject.FindGameObjectsWithTag("gameScene");
-        foreach (var y in x)
-            Destroy(y);
-
+        //GravityOff();
     }
 	
+	// Update is called once per frame
 	void Update () {
-
-        //spawning enemies every random time
-        if (levelStarted && spawnTime >= timeToNextSpawn)
-        {
-            SpawnEnemy();
-            spawnTime = 0;
-        }
-        spawnTime += Time.deltaTime;
+		
 	}
 
     public void StartGame()
     {
         Debug.Log("GameController::StartGame");
-        placeMode = MODE.PLACE_GAME_SCENE;
-        levelStarted = false;
-        spawnTime = 0;
-        timeToNextSpawn = 1.0f;
 
-        enemies = new List<GameObject>();
-
-        sceneCenterObject = Instantiate(sceneCenterPrefab, new Vector3(0, 0, 2), Quaternion.identity, this.transform);
-        sceneCenterObject.GetComponent<TapToPlace>().StartPlacing();
-
+        SpawnObject();
     }
 
-    //when tree is placed
-    public void PlacingIsDone()
+    public void SpawnObject()
     {
-        switch (placeMode)
+        Spawn(spawnObjectPrefab, new Vector3(0, 0, 2), Quaternion.identity);
+    }
+
+    public void Spawn(
+    Spawnable spawnObjectPrefab,
+    Vector3 position,
+    Quaternion rotation)
+    {
+        Debug.Log("Spawner::Spawn");
+        var spawnedObject = Instantiate(spawnObjectPrefab, position, rotation, null);
+
+        SpawnInit(spawnedObject);
+    }
+
+    private void SpawnInit(Spawnable spawnedObject)
+    {
+        spawnedObject.Init(Cursor);
+        var rigidbody = spawnedObject.GetComponent<Rigidbody>();
+        if (rigidbody)
         {
-            case MODE.PLACE_GAME_SCENE:
-                //lock the tree and scene
-                Destroy(sceneCenterObject.GetComponent<TapToPlace>());
-                StartLevel();
-                break;
-            case MODE.PLACE_OBSTACLE:
-                placeMode = MODE.PLACE_BOMB;
-                //GameObject obstacle = Instantiate(bombPrefab, GetSpawnPos(), Quaternion.identity, this.transform);
-                //obstacle.GetComponent<TapToPlace>().StartPlacing();
-                break;
-            case MODE.PLACE_TURRET_01:
-                break;
-            case MODE.PLACE_BOMB:
-                break;
-            case MODE.NONE:
-            case MODE._COUNT:
-            default:
-                break;
+            rigidbody.isKinematic = !IsGravity;
         }
     }
 
-    public Vector3 GetSpawnPos()
+    public void ToggleGravity()
     {
-        return GameObject.FindGameObjectWithTag("SPAWN_PLACE").transform.position;
-
-        /*
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (IsGravity)
         {
-            return hit.point;
-
-            // Do something with the object that was hit by the raycast.
+            GravityOff();
         }
-        return Camera.main.gameObject.transform.position;//awaryjnie
-         */
-        
+        else
+        {
+            GravityOn();
+        }
     }
 
-    public void StartLevel()
+    public void GravityOn()
     {
-        levelStarted = true;
-        spawnTime = 0;
-        timeToNextSpawn = Random.Range(0f, 2.0f);
-        placeMode = MODE.PLACE_BOMB;
-        //GameObject obstacle = Instantiate(bombPrefab, GetSpawnPos(), Quaternion.identity, this.transform);
-        //obstacle.GetComponent<TapToPlace>().StartPlacing();
+        IsGravity = true;
+
+        Debug.Log("Spawner::GravityOn");
+
+        var foundObjects = FindObjectsOfType<Rigidbody>();
+        foreach(var foundObject in foundObjects)
+        {
+            foundObject.isKinematic = false;
+        }
     }
 
-    void SpawnEnemy()
+    public void GravityOff()
     {
-        BoxCollider collider = sceneCenterObject.GetComponentInChildren<BoxCollider>();
-        float distance = collider.bounds.size.x * 0.5f;//will spawn in radius of 90% space between center of scene and border.
-        float angle = Random.Range(0, 360);
-        float x = Mathf.Cos(angle * Mathf.Deg2Rad) * distance + sceneCenterObject.transform.position.x;
-        float z = Mathf.Sin(angle * Mathf.Deg2Rad) * distance + sceneCenterObject.transform.position.z;
+        IsGravity = false;
 
-        enemies.Add(Instantiate(enemy01Prefab, new Vector3(x, sceneCenterObject.transform.position.y, z), Quaternion.identity, GameObject.FindGameObjectWithTag("INSTANTIATE_CONTAINER").transform));
+        Debug.Log("Spawner::GravityOff");
+
+        var foundObjects = FindObjectsOfType<Rigidbody>();
+        foreach (var foundObject in foundObjects)
+        {
+            foundObject.isKinematic = true;
+        }
     }
-
-    public void EndGame()//and restart
-    {
-        foreach (var e in enemies)
-            Destroy(e);
-        enemies.Clear();
-    }
-
 }
-
-
-//click play to start the game
-//click on screen to place the tree on mesh based on real world
-//play
