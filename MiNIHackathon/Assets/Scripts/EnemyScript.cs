@@ -30,6 +30,9 @@ public class EnemyScript : MonoBehaviour {
     {
         health -= damage;
 
+		
+
+		/*
         image.fillAmount = health / maxHealth;
 
         Vector3 newPosition = transform.position + new Vector3(0, 1f, 0);
@@ -37,10 +40,11 @@ public class EnemyScript : MonoBehaviour {
             transform);
         damagePopup.GetComponent<popupScript>().Init((-damage).ToString(),Color.red);
 
-
+	*/
         if (health < 0)
         {
             Destroy(gameObject);
         }
+
     }
 }
