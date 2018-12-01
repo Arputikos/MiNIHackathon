@@ -32,15 +32,28 @@ public class GameController : MonoBehaviour {
 
     bool levelStarted;
 
+    float timeToNextSpawn;//spawning every random time
+    float spawnTime;
+
     void Start () {
         if (!Cursor)
             Debug.LogError("!Cursor");
 
+        var x = GameObject.FindGameObjectsWithTag("gameScene");
+        foreach (var y in x)
+            Destroy(y);
+
     }
 	
 	void Update () {
-        if (levelStarted)
+
+        //spawning enemies every random time
+        if (levelStarted && spawnTime >= timeToNextSpawn)
+        {
             SpawnEnemy();
+            spawnTime = 0;
+        }
+        spawnTime += Time.deltaTime;
 	}
 
     public void StartGame()
@@ -48,6 +61,8 @@ public class GameController : MonoBehaviour {
         Debug.Log("GameController::StartGame");
         placeMode = MODE.PLACE_GAME_SCENE;
         levelStarted = false;
+        spawnTime = 0;
+        timeToNextSpawn = 1.0f;
 
         enemies = new List<GameObject>();
 
@@ -67,9 +82,9 @@ public class GameController : MonoBehaviour {
                 StartLevel();
                 break;
             case MODE.PLACE_OBSTACLE:
-                placeMode = MODE.PLACE_OBSTACLE;
-                GameObject obstacle = Instantiate(obstacle01Prefab, GetSpawnPos(), Quaternion.identity, this.transform);
-                obstacle.GetComponent<TapToPlace>().StartPlacing();
+                placeMode = MODE.PLACE_BOMB;
+                //GameObject obstacle = Instantiate(bombPrefab, GetSpawnPos(), Quaternion.identity, this.transform);
+                //obstacle.GetComponent<TapToPlace>().StartPlacing();
                 break;
             case MODE.PLACE_TURRET_01:
                 break;
@@ -85,25 +100,41 @@ public class GameController : MonoBehaviour {
     public Vector3 GetSpawnPos()
     {
         return GameObject.FindGameObjectWithTag("SPAWN_PLACE").transform.position;
+
+        /*
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            return hit.point;
+
+            // Do something with the object that was hit by the raycast.
+        }
+        return Camera.main.gameObject.transform.position;//awaryjnie
+         */
+        
     }
 
     public void StartLevel()
     {
         levelStarted = true;
-        placeMode = MODE.PLACE_OBSTACLE;
-        GameObject obstacle = Instantiate(obstacle01Prefab, GetSpawnPos(), Quaternion.identity, this.transform);
-        obstacle.GetComponent<TapToPlace>().StartPlacing();
+        spawnTime = 0;
+        timeToNextSpawn = Random.Range(0f, 2.0f);
+        placeMode = MODE.PLACE_BOMB;
+        //GameObject obstacle = Instantiate(bombPrefab, GetSpawnPos(), Quaternion.identity, this.transform);
+        //obstacle.GetComponent<TapToPlace>().StartPlacing();
     }
 
     void SpawnEnemy()
     {
         BoxCollider collider = sceneCenterObject.GetComponentInChildren<BoxCollider>();
-        float distance = collider.bounds.size.x * 0.4f;//will spawn in radius of 90% space between center of scene and border.
+        float distance = collider.bounds.size.x * 0.5f;//will spawn in radius of 90% space between center of scene and border.
         float angle = Random.Range(0, 360);
-        float x = Mathf.Cos(angle * Mathf.Deg2Rad) * distance;
-        float z = Mathf.Sin(angle * Mathf.Deg2Rad) * distance;
+        float x = Mathf.Cos(angle * Mathf.Deg2Rad) * distance + sceneCenterObject.transform.position.x;
+        float z = Mathf.Sin(angle * Mathf.Deg2Rad) * distance + sceneCenterObject.transform.position.z;
 
-        enemies.Add(Instantiate(enemy01Prefab, new Vector3(x, collider.bounds.max.y, z), Quaternion.identity, sceneCenterObject.transform));
+        enemies.Add(Instantiate(enemy01Prefab, new Vector3(x, sceneCenterObject.transform.position.y, z), Quaternion.identity, GameObject.FindGameObjectWithTag("INSTANTIATE_CONTAINER").transform));
     }
 
     public void EndGame()//and restart

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - INSTANTIATE_CONTAINER
   - SPAWN_PLACE
+  - gameScene
   layers:
   - Default
   - TransparentFX
