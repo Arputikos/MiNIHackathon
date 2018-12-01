@@ -83,8 +83,8 @@ public class GameController : MonoBehaviour {
                 break;
             case MODE.PLACE_OBSTACLE:
                 placeMode = MODE.PLACE_BOMB;
-                GameObject obstacle = Instantiate(bombPrefab, GetSpawnPos(), Quaternion.identity, this.transform);
-                obstacle.GetComponent<TapToPlace>().StartPlacing();
+                GameObject turret = Instantiate(turret01Prefab, GetSpawnPos(), Quaternion.identity, this.transform);
+                turret.GetComponent<TapToPlace>().StartPlacing();
                 break;
             case MODE.PLACE_TURRET_01:
                 break;
@@ -125,8 +125,8 @@ public class GameController : MonoBehaviour {
         spawnTime = 0;
         timeToNextSpawn = Random.Range(0f, 2.0f);
         placeMode = MODE.PLACE_BOMB;
-        GameObject obstacle = Instantiate(bombPrefab, GetSpawnPos(), Quaternion.identity, this.transform);
-        obstacle.GetComponent<TapToPlace>().StartPlacing();
+        GameObject turret = Instantiate(turret01Prefab, GetSpawnPos(), Quaternion.identity, this.transform);
+        turret.GetComponent<TapToPlace>().StartPlacing();
     }
 
     void SpawnEnemy()
