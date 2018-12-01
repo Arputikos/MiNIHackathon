@@ -577,6 +577,10 @@ PlayerSettings:
   platformArchitecture: {}
   scriptingBackend:
     Metro: 1
+<<<<<<< Updated upstream
+=======
+    Standalone: 1
+>>>>>>> Stashed changes
   il2cppCompilerConfiguration: {}
   incrementalIl2cppBuild: {}
   allowUnsafeCode: 0
