@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour {
     public float health = 20.0f;
 
     public Image image;
+    public GameObject popup;
 
 	void Start () {
 		
@@ -28,6 +29,12 @@ public class EnemyScript : MonoBehaviour {
         health -= damage;
 
         image.fillAmount = health / maxHealth;
+
+        Vector3 newPosition = transform.position + new Vector3(0, 1f, 0);
+        var damagePopup = Instantiate(popup, newPosition, Quaternion.identity,
+            transform);
+        damagePopup.GetComponent<popupScript>().Init((-damage).ToString(),Color.red);
+
 
         if (health < 0)
         {
