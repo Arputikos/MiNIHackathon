@@ -13,13 +13,17 @@ public class EnemyScript : MonoBehaviour {
     public Image image;
     public GameObject popup;
 
+	float t;
+
 	void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		transform.Rotate(Vector3.up * Time.deltaTime, Space.World);
+
 	}
 
 
