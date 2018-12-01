@@ -8,6 +8,7 @@ TagManager:
   - INSTANTIATE_CONTAINER
   - SPAWN_PLACE
   - TREE
+  - Enemy
   layers:
   - Default
   - TransparentFX
