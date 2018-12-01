@@ -16,7 +16,7 @@ public class popupScript : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-	    Init("Test", Color.green);
+	  
     }
 	
 	// Update is called once per frame
