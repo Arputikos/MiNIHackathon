@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+<<<<<<< HEAD
+  - INSTANTIATE_CONTAINER
+  - SPAWN_PLACE
+  - gameScene
+=======
+  - Enemy
+>>>>>>> 9ef8cf75bbc66c9dd0eddc08affe74f09acc0eb0
   layers:
   - Default
   - TransparentFX

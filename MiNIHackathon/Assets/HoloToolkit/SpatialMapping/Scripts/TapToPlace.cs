@@ -148,7 +148,7 @@ namespace HoloToolkit.Unity.SpatialMapping
                 StopPlacing();
             }
         }
-        private void StartPlacing()
+        public void StartPlacing()
         {
             var layerCacheTarget = PlaceParentOnTap ? ParentGameObjectToPlace : gameObject;
             layerCacheTarget.SetLayerRecursively(IgnoreRaycastLayer, out layerCache);
@@ -166,6 +166,7 @@ namespace HoloToolkit.Unity.SpatialMapping
 
             ToggleSpatialMesh();
             AttachWorldAnchor();
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().PlacingIsDone();
         }
 
         private void AttachWorldAnchor()
