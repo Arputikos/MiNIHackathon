@@ -491,8 +491,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 405576713}
-  m_Father: {fileID: 329625812}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -534,11 +534,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1000012072213228, guid: a611e772ef8ddf64d8106a9cbb70f31c,
     type: 2}
   m_PrefabInternal: {fileID: 1120785183}
---- !u!4 &329625812 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4587520633816736, guid: d29bc40b7f3df26479d6a0aac211c355,
-    type: 2}
-  m_PrefabInternal: {fileID: 1581505038}
 --- !u!1 &371216474
 GameObject:
   m_ObjectHideFlags: 0
@@ -2069,8 +2064,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cursor: {fileID: 307031168}
-  spawnObjectPrefab: {fileID: 114221297420831672, guid: 7010a07b15967004dbf5ea5897d53d52,
-    type: 2}
+  sceneCenterPrefab: {fileID: 0}
+  enemy01Prefab: {fileID: 0}
+  turret01Prefab: {fileID: 0}
+  obstacle01Prefab: {fileID: 0}
+  bombPrefab: {fileID: 0}
 --- !u!114 &1280105747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2083,7 +2081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 1280105746}
-  gameMenu: {fileID: 1613095634}
+  gameStartMenu: {fileID: 0}
 --- !u!114 &1280105748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2322,6 +2320,10 @@ Prefab:
     - target: {fileID: 4541142303025740, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4478633532194436, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d29bc40b7f3df26479d6a0aac211c355, type: 2}
