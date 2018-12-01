@@ -1,0 +1,34 @@
+-jakiœ gameloop czy coœ
+-stawianie choinki na pocz¹tku gry
+-pasek zdrowia choinki na HIDzie (i na UI)
+-przegrywanie gdy ¿ycie 0
+
+-przeciwnicy i ai (navmeshe)
+-spawnowanie ich
+-*fale przeciwników
+-animacje przeciwników
+
+-ustawianie boxa
+-UI przyciski (wybór czynnoœci): ustawianie boxa, wie¿yczki i prezentu
+-ustawianie wie¿yczki (tylko na boxie, i tylko jedn¹)
+-postawienie prezentu, wybuch po 2-3 s. i particle
+-*animacje wie¿yczek i pociski
+-napis ile dmg, ile hajsu dostajesz, ile tracisz przy stawianiu czegoœ/zabiciu
+
+-hajs, stan i odejmowanie za wie¿yczki, prezenty i boxy, dodawanie za kille
+-audio fx
+-muzyka
+
+-vfx: pada œnieg
+
+-*time limit
+-*restart
+
+POTRZEBNE ASSETY
+-cube z tekstur¹ pud³a albo prezentu
+-model wie¿yczki
+-particle œnieg
+-particle wybuch
+-muzyka
+-audio wybuchu, chodzenia, spawnu, strzelania wie¿yczki, damage
+...
